@@ -1,10 +1,10 @@
-package com.bixi.util;
+package com.bixi.utils;
 
 import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 
-public abstract class BixiReflectionUtil extends ReflectionUtils {
+public abstract class BixiReflectionUtils extends ReflectionUtils {
     public static <T> T getFieldValue(Object obj,String fieldName){
         Field filed = ReflectionUtils.findField(obj.getClass(),fieldName);
         filed.setAccessible(true);

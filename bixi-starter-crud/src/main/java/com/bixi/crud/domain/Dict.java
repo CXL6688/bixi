@@ -15,9 +15,11 @@
  */
 package com.bixi.crud.domain;
 
+import com.bixi.crud.config.BixiEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 
 import javax.persistence.*;
@@ -27,9 +29,11 @@ import java.io.Serializable;
 * @author Zheng Jie
 * @date 2019-04-10
 */
+@BixiEntity
 @Entity
 @Getter
 @Setter
+@Component
 @Table(name="sys_dict")
 public class Dict extends BaseEntity implements Serializable {
 
