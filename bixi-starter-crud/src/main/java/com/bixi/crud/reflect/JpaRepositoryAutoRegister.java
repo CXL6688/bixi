@@ -17,13 +17,19 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.persistence.EntityManager;
 import java.beans.Introspector;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -49,8 +55,23 @@ public class JpaRepositoryAutoRegister implements ApplicationContextAware {
         DefaultListableBeanFactory defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext.getBeanFactory();
         BeanDefinitionBuilder builder= BeanDefinitionBuilder.genericBeanDefinition(BaseControllerImpl.class);
         builder=builder.addPropertyReference("baseService",NameUtils.generateServiceNameByEntity(autoEnhanceEntity));
-        String beanName= NameUtils.generateControllerNameByEntity(autoEnhanceEntity);
-        defaultListableBeanFactory.registerBeanDefinition(beanName, builder.getRawBeanDefinition());
+        String controllerBeanName= NameUtils.generateControllerNameByEntity(autoEnhanceEntity);
+        defaultListableBeanFactory.registerBeanDefinition(controllerBeanName, builder.getRawBeanDefinition());
+
+        Map<String, RequestMappingHandlerMapping> map = applicationContext.getBeansOfType(RequestMappingHandlerMapping.class);
+        Optional<RequestMappingHandlerMapping> optional= map.values().stream().findFirst();
+        RequestMappingHandlerMapping requestMappingHandlerMapping=optional.get();
+        RequestMappingInfo requestMappingInfo = RequestMappingInfo
+                .paths("/"+NameUtils.generateControllerURLByEntity(autoEnhanceEntity)+"/all")
+                .methods(RequestMethod.GET)
+                .build();
+        Object controller=this.applicationContext.getBean(controllerBeanName);
+        try {
+            Method method = BaseControllerImpl.class.getMethod("queryAll",new Class[]{});
+            requestMappingHandlerMapping.registerMapping(requestMappingInfo,controller,method);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
 
     }
 

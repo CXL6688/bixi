@@ -14,4 +14,8 @@ public class NameUtils {
     public static String generateControllerNameByEntity(Class entityClass){
         return Introspector.decapitalize(entityClass.getSimpleName()+"Controller");
     }
+
+    public static String generateControllerURLByEntity(Class entityClass){
+        return Introspector.decapitalize(entityClass.getSimpleName());
+    }
 }

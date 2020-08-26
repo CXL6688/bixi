@@ -20,7 +20,6 @@ import java.util.Arrays;
 @SpringBootApplication
 @EnableCrud
 public class AppRunner {
-
     public static void main(String[] args) {
         ApplicationContext applicationContext= SpringApplication.run(AppRunner.class, args);
         String beanName= NameUtils.generateServiceNameByEntity(User.class);

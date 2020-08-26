@@ -18,6 +18,7 @@
         <module>bixi-starter-crud</module>
         <module>bixi-boot-parent</module>
         <module>core-common</module>
+        <module>desgin-pattern-starter</module>
     </modules>
 
 

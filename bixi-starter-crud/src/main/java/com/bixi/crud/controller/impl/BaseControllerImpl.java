@@ -19,38 +19,32 @@ public class BaseControllerImpl<T> implements BaseController<T> {
     private BaseService baseService;
 
     @Override
-    @GetMapping(value = "/download")
     public void download(HttpServletResponse response, QueryCriteria criteria) throws IOException {
         baseService.download(baseService.queryAll(criteria), response);
     }
 
     @Override
-    @GetMapping(value = "/all")
     public ResponseEntity<Object> queryAll() {
         return new ResponseEntity<>(this.baseService.queryAll(new QueryCriteria()),HttpStatus.OK);
     }
 
     @Override
-    @GetMapping
     public ResponseEntity<Object> query(QueryCriteria resources, Pageable pageable) {
         return null;
     }
 
     @Override
-    @PostMapping
     public ResponseEntity<Object> create(T resources) {
         baseService.create(resources);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Override
-    @PutMapping
     public ResponseEntity<Object> update(T resources) {
         return null;
     }
 
     @Override
-    @DeleteMapping
     public ResponseEntity<Object> delete(Set<Long> ids) {
         return new ResponseEntity<>(HttpStatus.OK);
     }
