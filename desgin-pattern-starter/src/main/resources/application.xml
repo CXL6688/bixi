@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="auth1Strategy" class="com.bixi.dp.structure.strategy.strategy.Auth1Strategy"></bean>
+
+    <bean id="auth2Strategy" class="com.bixi.dp.structure.strategy.strategy.Auth2Strategy"></bean>
+
+    <bean id="context1" class="com.bixi.dp.structure.strategy.Context">
+        <property name="condition">
+            <bean class="com.bixi.dp.structure.strategy.condition.CompositeCondition">
+                <property name="conditions">
+                    <list>
+                        <bean class="com.bixi.dp.structure.strategy.condition.TimeCondition">
+                            <property name="startTime" value="1598630400000"></property>
+                            <property name="endTime" value="1598716800000"></property>
+                        </bean>
+
+                        <bean class="com.bixi.dp.structure.strategy.condition.LocationCondition">
+                            <property name="targetLocation" value="壹佰文创大厦"></property>
+                        </bean>
+                    </list>
+                </property>
+
+                <property name="relation">
+                    <bean class="com.bixi.dp.structure.strategy.relation.AndRelation"></bean>
+                </property>
+            </bean>
+        </property>
+        <property name="strategy" ref="auth1Strategy"></property>
+    </bean>
+
+    <bean id="context2" class="com.bixi.dp.structure.strategy.Context">
+        <property name="condition">
+            <bean class="com.bixi.dp.structure.strategy.condition.CompositeCondition">
+                <property name="conditions">
+                    <list>
+                        <bean class="com.bixi.dp.structure.strategy.condition.TimeCondition">
+                            <property name="startTime" value="1598630400000"></property>
+                            <property name="endTime" value="1598716800000"></property>
+                        </bean>
+
+                        <bean class="com.bixi.dp.structure.strategy.condition.LocationCondition">
+                            <property name="targetLocation" value="廊坊师范学院"></property>
+                        </bean>
+                    </list>
+                </property>
+
+                <property name="relation">
+                    <bean class="com.bixi.dp.structure.strategy.relation.AndRelation"></bean>
+                </property>
+            </bean>
+        </property>
+        <property name="strategy" ref="auth2Strategy"></property>
+    </bean>
+
+</beans>

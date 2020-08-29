@@ -1,14 +1,12 @@
 package com.bixi.dp.structure.strategy;
 
+import com.bixi.dp.structure.strategy.condition.Condition;
+import com.bixi.dp.structure.strategy.strategy.Strategy;
+import lombok.Data;
+
+@Data
 public class Context {
-    private Long startTime;
-    private Long endTime;
-    private String location;
+    private Condition condition;
+
     private Strategy strategy;
-
-    public Context(Long startTime,Long endTime, String location,Strategy strategy){
-
-    }
-
-
 }
