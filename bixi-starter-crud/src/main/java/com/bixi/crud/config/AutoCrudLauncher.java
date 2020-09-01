@@ -2,6 +2,7 @@ package com.bixi.crud.config;
 
 import com.bixi.crud.finder.BixiEntityFinder;
 import com.bixi.crud.register.BeanRegister;
+import com.bixi.crud.register.JpaRepositoryAutoRegister;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +14,9 @@ public class AutoCrudLauncher {
 
     @Autowired
     private List<BeanRegister> beanRegisters;
+
+    @Autowired
+    private JpaRepositoryAutoRegister jpaRepositoryAutoRegister;
 
     @PostConstruct
     private void start(){

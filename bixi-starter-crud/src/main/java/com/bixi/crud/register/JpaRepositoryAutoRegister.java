@@ -63,6 +63,7 @@ public class JpaRepositoryAutoRegister implements ApplicationContextAware {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
+
     }
 
     private void registService(Class autoEnhanceEntity) {

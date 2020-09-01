@@ -73,7 +73,7 @@ public class ControllerRegister extends AbsBeanRegister{
             if(requestMapping==null){
                 continue;
             }
-            String[] requestMappingPaths=requestMapping.value();
+            String[] requestMappingPaths=requestMapping.path();
             RequestMethod[] requestMethods=requestMapping.method();
             for (int i=0;i<requestMappingPaths.length;i++){
                 String requestMappingPath=requestMappingPaths[i];
