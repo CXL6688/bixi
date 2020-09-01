@@ -1,4 +1,4 @@
-package com.bixi.crud.controller;
+package com.bixi.crud.template.controller;
 
 import com.bixi.crud.dto.QueryCriteria;
 import org.springframework.data.domain.Pageable;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 
 public interface BaseController<T> {
@@ -21,5 +22,5 @@ public interface BaseController<T> {
 
     ResponseEntity<Object> update( @RequestBody T resources);
 
-    ResponseEntity<Object> delete(@RequestBody Set<Long> ids);
+    ResponseEntity<Object> delete(@RequestBody List<Long> ids);
 }

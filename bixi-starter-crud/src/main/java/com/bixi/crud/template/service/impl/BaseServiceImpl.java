@@ -1,7 +1,7 @@
-package com.bixi.crud.service.impl;
+package com.bixi.crud.template.service.impl;
 
 import com.bixi.crud.dto.QueryCriteria;
-import com.bixi.crud.service.BaseService;
+import com.bixi.crud.template.service.BaseService;
 import com.bixi.crud.utils.QueryHelp;
 import lombok.Data;
 import org.springframework.data.domain.Page;
@@ -49,6 +49,15 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
     }
 
+    /**
+     * @Description: TODO
+     * @param queryAll:
+     * @param response: 
+     * @return: void
+     * @throws
+     * @author Cao Xueliang
+     * @date 2020/9/1 9:04
+     **/
     @Override
     public void download(List<T> queryAll, HttpServletResponse response) throws IOException {
 

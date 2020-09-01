@@ -1,36 +1,27 @@
-package com.bixi.crud.reflect;
+package com.bixi.crud.register;
 
 import com.bixi.crud.config.BixiEntity;
-import com.bixi.crud.controller.impl.BaseControllerImpl;
-import com.bixi.crud.service.impl.BaseServiceImpl;
+import com.bixi.crud.template.controller.impl.BaseControllerImpl;
+import com.bixi.crud.template.service.impl.BaseServiceImpl;
 import com.bixi.crud.utils.NameUtils;
-import com.bixi.utils.BixiReflectionUtils;
-import org.springframework.aop.TargetSource;
-import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 import javax.persistence.EntityManager;
-import java.beans.Introspector;
 import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Component
 public class JpaRepositoryAutoRegister implements ApplicationContextAware {
@@ -41,7 +32,7 @@ public class JpaRepositoryAutoRegister implements ApplicationContextAware {
     }
 
     private void autoRegistRepository(){
-        List<Class> entitiesInSpringContainer = getDetachedEntities();
+        List<Class> entitiesInSpringContainer = getAllEntitiesWithBixiAnnotation();
         EntityManager em=this.applicationContext.getBean(EntityManager.class);
         entitiesInSpringContainer.stream().forEach(autoEnhanceEntity->{
             registRepository(em, autoEnhanceEntity);
@@ -72,7 +63,6 @@ public class JpaRepositoryAutoRegister implements ApplicationContextAware {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
-
     }
 
     private void registService(Class autoEnhanceEntity) {
@@ -94,44 +84,13 @@ public class JpaRepositoryAutoRegister implements ApplicationContextAware {
         defaultListableBeanFactory.registerBeanDefinition(beanName, builder.getRawBeanDefinition());
     }
 
-    private List<Class> getDetachedEntities() {
-        List<Class> entitiesInSpringContainer=this.getAllEntitiesInSpringContainer();
-        List<Class> customEntities= this.detectAllEntitiesWithCustomRepository();
-        entitiesInSpringContainer.removeAll(customEntities);
-        return entitiesInSpringContainer;
-    }
-
-    private List<Class> getAllEntitiesInSpringContainer(){
-        List<Class> entityNames=new ArrayList<>();
+    private List<Class> getAllEntitiesWithBixiAnnotation(){
+        List<Class> entitys=new ArrayList<>();
         Map<String, Object> map =  this.applicationContext.getBeansWithAnnotation(BixiEntity.class);
         map.values().stream().forEach(entity->{
-            entityNames.add(entity.getClass());
+            entitys.add(entity.getClass());
         });
-        return entityNames;
-    }
-
-    private List<Class> detectAllEntitiesWithCustomRepository() {
-        Map<String,JpaRepository> jpaRepositoryMap= this.applicationContext.getBeansOfType(JpaRepository.class);
-        List<JpaRepository> jpaRepositories = jpaRepositoryMap.values().stream().collect(Collectors.toList());
-        List<Class> custormEntityNames=new ArrayList<>();
-        jpaRepositories.stream().forEach(jpaRepository -> {
-            Proxy proxy=(Proxy)jpaRepository;
-            Object hObject= BixiReflectionUtils.getFieldValue(proxy,"h");
-            ProxyFactory advisedObject= BixiReflectionUtils.getFieldValue(hObject,"advised");
-            TargetSource targetSource = advisedObject.getTargetSource();
-            try {
-                Object object= targetSource.getTarget();
-                if(object instanceof SimpleJpaRepository){
-                    SimpleJpaRepository simpleJpaRepository= (SimpleJpaRepository) object;
-                    JpaMetamodelEntityInformation jpaMetamodelEntityInformation= BixiReflectionUtils.getFieldValue(simpleJpaRepository,"entityInformation");
-                    Class clazz= BixiReflectionUtils.getFieldValue(jpaMetamodelEntityInformation,"domainClass");
-                    custormEntityNames.add(clazz);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        return custormEntityNames;
+        return entitys;
     }
 
     @Override

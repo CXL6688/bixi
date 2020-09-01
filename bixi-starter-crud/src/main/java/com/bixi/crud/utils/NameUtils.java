@@ -4,15 +4,15 @@ import java.beans.Introspector;
 
 public class NameUtils {
     public static String generateRepositoryNameByEntity(Class entityClass){
-        return Introspector.decapitalize(entityClass.getSimpleName()+"Repository");
+        return Introspector.decapitalize(entityClass.getSimpleName()+"BixiRepository");
     }
 
     public static String generateServiceNameByEntity(Class entityClass){
-        return Introspector.decapitalize(entityClass.getSimpleName()+"Service");
+        return Introspector.decapitalize(entityClass.getSimpleName()+"BixiService");
     }
 
     public static String generateControllerNameByEntity(Class entityClass){
-        return Introspector.decapitalize(entityClass.getSimpleName()+"Controller");
+        return Introspector.decapitalize(entityClass.getSimpleName()+"BixiController");
     }
 
     public static String generateControllerURLByEntity(Class entityClass){

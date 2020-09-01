@@ -1,4 +1,4 @@
-package com.bixi.crud.domain;
+package com.bixi.crud.test.domain;
 
 import com.bixi.crud.config.BixiEntity;
 import lombok.Getter;
