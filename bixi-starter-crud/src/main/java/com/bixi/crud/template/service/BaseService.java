@@ -1,6 +1,7 @@
 package com.bixi.crud.template.service;
 
 import com.bixi.crud.dto.QueryCriteria;
+import com.bixi.crud.test.domain.BaseEntity;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;
@@ -45,7 +46,7 @@ public interface BaseService<T> {
      * 删除
      * @param ids /
      */
-    void delete(Set<Long> ids);
+    void delete(List<Long> ids);
 
     /**
      * 导出数据

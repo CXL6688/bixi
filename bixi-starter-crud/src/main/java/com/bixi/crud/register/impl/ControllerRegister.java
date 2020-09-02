@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.*;
 
 /**
@@ -25,7 +26,12 @@ import java.util.*;
 public class ControllerRegister extends AbsBeanRegister{
 
     @Value("${com.bixi.crud.template.controller.impl.BaseControllerImpl.property.BaseService.name}")
-    private String baseControllerPropertyName;
+    private String baseServiceProperty;
+    @Value("${com.bixi.crud.template.controller.impl.BaseControllerImpl.property.entityClazz}")
+    private String entityClazzProperty;
+    @Value("${com.bixi.crud.template.controller.impl.BaseControllerImpl.property.objectMapper}")
+    private String objectMapperProperty;
+
     @Value("${com.bixi.crud.register.impl.ControllerRegister.target}")
     private String target;
 
@@ -34,7 +40,9 @@ public class ControllerRegister extends AbsBeanRegister{
         try {
             Class clazz=Class.forName(this.target);
             BeanDefinitionBuilder builder= BeanDefinitionBuilder.genericBeanDefinition(clazz);
-            builder=builder.addPropertyReference(baseControllerPropertyName, NameUtils.generateServiceNameByEntity(entityClass));
+            builder=builder.addPropertyReference(baseServiceProperty, NameUtils.generateServiceNameByEntity(entityClass));
+            builder=builder.addPropertyValue(entityClazzProperty,entityClass);
+            builder=builder.addAutowiredProperty(objectMapperProperty);
             return builder;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

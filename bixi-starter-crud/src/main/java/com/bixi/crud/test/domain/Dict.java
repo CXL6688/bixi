@@ -15,6 +15,7 @@
  */
 package com.bixi.crud.test.domain;
 
+import cn.afterturn.easypoi.excel.annotation.Excel;
 import com.bixi.crud.config.BixiEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -36,16 +37,12 @@ import java.io.Serializable;
 @Component
 @Table(name="sys_dict")
 public class Dict extends BaseEntity implements Serializable {
-
     @Id
-    @Column(name = "dict_id")
-    @ApiModelProperty(value = "ID", hidden = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ApiModelProperty(value = "名称")
+    @Excel(name = "名称", orderNum = "0")
     private String name;
-
-    @ApiModelProperty(value = "描述")
+    @Excel(name = "描述", orderNum = "1")
     private String description;
 }

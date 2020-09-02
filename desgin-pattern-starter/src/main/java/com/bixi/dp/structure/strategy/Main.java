@@ -14,7 +14,7 @@ public class Main {
         Map userInfo=new HashMap();
         userInfo.put("name","小张");
         userInfo.put("time",1598666400000L);
-        userInfo.put("location","廊坊师范学院");
+        userInfo.put("location","壹佰文创大厦");
 
         contextMap.values().stream().forEach(context -> {
             if(context.getCondition().isMatch(userInfo)){

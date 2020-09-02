@@ -17,7 +17,13 @@ public class AutoCrudLauncher {
 
     @Autowired
     private JpaRepositoryAutoRegister jpaRepositoryAutoRegister;
-
+    /**
+     * @Description: invoke
+     * @return: void
+     * @throws
+     * @author Cao Xueliang
+     * @date 2020/9/2 10:59
+     **/
     @PostConstruct
     private void start(){
         List<Class> entities = bixiEntityFinder.findAll();

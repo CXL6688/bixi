@@ -10,6 +10,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>bixi-starter-crud</artifactId>
+    <properties>
+        <easypoi.version>3.2.0</easypoi.version>
+    </properties>
 
     <dependencies>
         <!--Mysql依赖包-->
@@ -19,5 +22,21 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!--easypoi-->
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-base</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-web</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.afterturn</groupId>
+            <artifactId>easypoi-annotation</artifactId>
+            <version>${easypoi.version}</version>
+        </dependency>
     </dependencies>
 </project>
