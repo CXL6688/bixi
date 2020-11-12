@@ -20,7 +20,7 @@ public interface BaseController<T> {
 
     ResponseEntity<Object> create(@Validated @RequestBody String json);
 
-    ResponseEntity<Object> update( @RequestBody String json);
+    ResponseEntity<Object> update(@RequestBody String json);
 
     ResponseEntity<Object> delete(@RequestBody List<Long> ids);
 }

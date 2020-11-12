@@ -17,13 +17,13 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
- * @Description: regist controller for entity
  * @author cao xueliang
+ * @Description: regist controller for entity
  * @date 2020/9/1 10:07
-*/
+ */
 @Order(100)
 @Component
-public class ControllerRegister extends AbsBeanRegister{
+public class ControllerRegister extends AbsBeanRegister {
 
     @Value("${com.bixi.crud.template.controller.impl.BaseControllerImpl.property.BaseService.name}")
     private String baseServiceProperty;
@@ -38,11 +38,11 @@ public class ControllerRegister extends AbsBeanRegister{
     @Override
     protected BeanDefinitionBuilder getBeanDefinitionBuilder(Class entityClass) {
         try {
-            Class clazz=Class.forName(this.target);
-            BeanDefinitionBuilder builder= BeanDefinitionBuilder.genericBeanDefinition(clazz);
-            builder=builder.addPropertyReference(baseServiceProperty, NameUtils.generateServiceNameByEntity(entityClass));
-            builder=builder.addPropertyValue(entityClazzProperty,entityClass);
-            builder=builder.addAutowiredProperty(objectMapperProperty);
+            Class clazz = Class.forName(this.target);
+            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
+            builder = builder.addPropertyReference(baseServiceProperty, NameUtils.generateServiceNameByEntity(entityClass));
+            builder = builder.addPropertyValue(entityClazzProperty, entityClass);
+            builder = builder.addAutowiredProperty(objectMapperProperty);
             return builder;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -63,36 +63,36 @@ public class ControllerRegister extends AbsBeanRegister{
     }
 
     /**
+     * @throws
      * @Description: regist mvc routers
      * @return: boolean
-     * @throws
      * @author Cao Xueliang
      * @date 2020/9/1 10:42
      **/
-    private boolean registRequestMapping(Class entityClass){
+    private boolean registRequestMapping(Class entityClass) {
         Map<String, RequestMappingHandlerMapping> map = applicationContext.getBeansOfType(RequestMappingHandlerMapping.class);
-        Optional<RequestMappingHandlerMapping> optional= map.values().stream().findFirst();
-        RequestMappingHandlerMapping requestMappingHandlerMapping=optional.get();
-        String baseURL=NameUtils.generateControllerURLByEntity(entityClass);
-        Object controller=this.applicationContext.getBean(this.getBeanName(entityClass));
-        Method[] methods= controller.getClass().getMethods();
-        for (Method method:methods){
-            RequestMapping requestMapping= method.getAnnotation(RequestMapping.class);
-            if(requestMapping==null){
+        Optional<RequestMappingHandlerMapping> optional = map.values().stream().findFirst();
+        RequestMappingHandlerMapping requestMappingHandlerMapping = optional.get();
+        String baseURL = NameUtils.generateControllerURLByEntity(entityClass);
+        Object controller = this.applicationContext.getBean(this.getBeanName(entityClass));
+        Method[] methods = controller.getClass().getMethods();
+        for (Method method : methods) {
+            RequestMapping requestMapping = method.getAnnotation(RequestMapping.class);
+            if (requestMapping == null) {
                 continue;
             }
-            String[] requestMappingPaths=requestMapping.path();
-            RequestMethod[] requestMethods=requestMapping.method();
-            for (int i=0;i<requestMappingPaths.length;i++){
-                String requestMappingPath=requestMappingPaths[i];
-                requestMappingPath="/"+baseURL+requestMappingPath;
-                requestMappingPaths[i]=requestMappingPath;
+            String[] requestMappingPaths = requestMapping.path();
+            RequestMethod[] requestMethods = requestMapping.method();
+            for (int i = 0; i < requestMappingPaths.length; i++) {
+                String requestMappingPath = requestMappingPaths[i];
+                requestMappingPath = "/" + baseURL + requestMappingPath;
+                requestMappingPaths[i] = requestMappingPath;
             }
             RequestMappingInfo requestMappingInfo = RequestMappingInfo
                     .paths(requestMappingPaths)
                     .methods(requestMethods)
                     .build();
-            requestMappingHandlerMapping.registerMapping(requestMappingInfo,controller,method);
+            requestMappingHandlerMapping.registerMapping(requestMappingInfo, controller, method);
         }
         return true;
     }

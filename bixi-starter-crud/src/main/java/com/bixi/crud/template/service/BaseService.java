@@ -13,17 +13,18 @@ import java.util.Set;
 public interface BaseService<T> {
 
     /**
-     * @Description: TODO
      * @param
-     * @return java.util.Map<java.lang.String,java.lang.Object>
+     * @return java.util.Map<java.lang.String, java.lang.Object>
      * @throws
+     * @Description: TODO
      * @author cao xueliang
      * @date 2020/8/31 21:32
-    */
-    Map<String,Object> queryAll(QueryCriteria criteria, Pageable pageable);
+     */
+    Map<String, Object> queryAll(QueryCriteria criteria, Pageable pageable);
 
     /**
      * 查询全部数据
+     *
      * @param criteria /
      * @return /
      */
@@ -31,6 +32,7 @@ public interface BaseService<T> {
 
     /**
      * 创建
+     *
      * @param resources /
      * @return /
      */
@@ -38,18 +40,21 @@ public interface BaseService<T> {
 
     /**
      * 编辑
+     *
      * @param resources /
      */
     void update(T resources);
 
     /**
      * 删除
+     *
      * @param ids /
      */
     void delete(List<Long> ids);
 
     /**
      * 导出数据
+     *
      * @param queryAll 待导出的数据
      * @param response /
      * @throws IOException /

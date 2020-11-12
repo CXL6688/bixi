@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 
 /**
- * @Description: regist repository for entity
  * @author cao xueliang
+ * @Description: regist repository for entity
  * @date 2020/9/19:26
-*/
+ */
 @Component
 @Order(1)
 public class RepositoryRegister extends AbsBeanRegister {
@@ -26,10 +26,10 @@ public class RepositoryRegister extends AbsBeanRegister {
     @Override
     protected BeanDefinitionBuilder getBeanDefinitionBuilder(Class entityClass) {
         try {
-            Class targetClass= Class.forName(this.target);
-            BeanDefinitionBuilder builder= BeanDefinitionBuilder.genericBeanDefinition(targetClass);
-            builder=builder.addConstructorArgValue(entityClass);
-            builder=builder.addConstructorArgValue(em);
+            Class targetClass = Class.forName(this.target);
+            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(targetClass);
+            builder = builder.addConstructorArgValue(entityClass);
+            builder = builder.addConstructorArgValue(em);
             return builder;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -45,6 +45,6 @@ public class RepositoryRegister extends AbsBeanRegister {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         super.setApplicationContext(applicationContext);
-        this.em=applicationContext.getBean(EntityManager.class);
+        this.em = applicationContext.getBean(EntityManager.class);
     }
 }

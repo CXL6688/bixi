@@ -1,15 +1,16 @@
 package com.bixi.crud.register;
-/**  
- * @Description: auto regist different kind of bean by entity class type
+
+/**
  * @author cao xueliang
+ * @Description: auto regist different kind of bean by entity class type
  * @date 2020/9/19:14
-*/
+ */
 public interface BeanRegister {
     /**
-     * @Description: regist entity business bean
      * @param entityClass: entity class
-     * @return: boolean
      * @throws
+     * @Description: regist entity business bean
+     * @return: boolean
      * @author Cao Xueliang
      * @date 2020/9/2 11:02
      **/

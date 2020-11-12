@@ -26,49 +26,49 @@ public class BaseControllerImpl<T extends BaseEntity> implements BaseController<
     private ObjectMapper objectMapper;
 
     @Override
-    @RequestMapping(path = "/download",method =RequestMethod.GET)
+    @RequestMapping(path = "/download", method = RequestMethod.GET)
     public void download(HttpServletResponse response, QueryCriteria criteria) throws IOException {
         baseService.download(baseService.queryAll(criteria), response);
     }
 
     @Override
-    @RequestMapping(path = "/all",method =RequestMethod.GET)
+    @RequestMapping(path = "/all", method = RequestMethod.GET)
     public ResponseEntity<Object> queryAll() {
-        return new ResponseEntity<>(this.baseService.queryAll(new QueryCriteria()),HttpStatus.OK);
+        return new ResponseEntity<>(this.baseService.queryAll(new QueryCriteria()), HttpStatus.OK);
     }
 
     @Override
-    @RequestMapping(path = "",method =RequestMethod.GET)
+    @RequestMapping(path = "", method = RequestMethod.GET)
     public ResponseEntity<Object> query(QueryCriteria queryCriteria, Pageable pageable) {
-        return new ResponseEntity<>(this.baseService.queryAll(queryCriteria,pageable),HttpStatus.OK);
+        return new ResponseEntity<>(this.baseService.queryAll(queryCriteria, pageable), HttpStatus.OK);
     }
 
     @Override
-    @RequestMapping(path = "",method =RequestMethod.POST)
+    @RequestMapping(path = "", method = RequestMethod.POST)
     public ResponseEntity<Object> create(@RequestBody String json) {
         try {
-            baseService.create(objectMapper.readValue(json,entityClazz));
+            baseService.create(objectMapper.readValue(json, entityClazz));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>("创建成功",HttpStatus.OK);
+        return new ResponseEntity<>("创建成功", HttpStatus.OK);
     }
 
     @Override
-    @RequestMapping(path = "",method =RequestMethod.PUT)
+    @RequestMapping(path = "", method = RequestMethod.PUT)
     public ResponseEntity<Object> update(@RequestBody String json) {
         try {
-            baseService.update(objectMapper.readValue(json,entityClazz));
+            baseService.update(objectMapper.readValue(json, entityClazz));
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>("更新成功",HttpStatus.OK);
+        return new ResponseEntity<>("更新成功", HttpStatus.OK);
     }
 
     @Override
-    @RequestMapping(path = "",method =RequestMethod.DELETE)
+    @RequestMapping(path = "", method = RequestMethod.DELETE)
     public ResponseEntity<Object> delete(@RequestBody List<Long> ids) {
         this.baseService.delete(ids);
-        return new ResponseEntity<>("删除成功",HttpStatus.OK);
+        return new ResponseEntity<>("删除成功", HttpStatus.OK);
     }
 }

@@ -12,19 +12,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Description: finder for detect entities in spring
  * @author cao xueliang
+ * @Description: finder for detect entities in spring
  * @date 2020/9/19:03
-*/
+ */
 @Component
 public class BixiEntityFinderForSpring implements BixiEntityFinder, ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Override
     public List<Class> findAll() {
-        List<Class> entitys=new ArrayList<>();
-        Map<String, Object> map =  this.applicationContext.getBeansWithAnnotation(BixiEntity.class);
-        map.values().stream().forEach(entity->{
+        List<Class> entitys = new ArrayList<>();
+        Map<String, Object> map = this.applicationContext.getBeansWithAnnotation(BixiEntity.class);
+        map.values().stream().forEach(entity -> {
             entitys.add(entity.getClass());
         });
         return entitys;
@@ -32,6 +32,6 @@ public class BixiEntityFinderForSpring implements BixiEntityFinder, ApplicationC
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext=applicationContext;
+        this.applicationContext = applicationContext;
     }
 }

@@ -7,8 +7,8 @@ import java.util.List;
 public class OrRelation extends AbsRelation {
     @Override
     public <T> boolean with(List<Condition> conditions, T t) {
-        for (Condition condition:conditions){
-            if (condition.isMatch(t)){
+        for (Condition condition : conditions) {
+            if (condition.isMatch(t)) {
                 return true;
             }
         }

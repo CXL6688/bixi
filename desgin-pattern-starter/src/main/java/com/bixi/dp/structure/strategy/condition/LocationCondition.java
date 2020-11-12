@@ -11,12 +11,12 @@ public class LocationCondition extends AbsCondition {
 
     @Override
     public <T> boolean matches(T t) {
-        if(!(t instanceof Map)){
+        if (!(t instanceof Map)) {
             return false;
         }
-        Map map= (Map) t;
-        String location= (String) map.get("location");
-        if(location.equals(targetLocation)){
+        Map map = (Map) t;
+        String location = (String) map.get("location");
+        if (location.equals(targetLocation)) {
             return true;
         }
         return false;

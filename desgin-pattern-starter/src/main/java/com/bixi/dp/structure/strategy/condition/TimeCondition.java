@@ -11,12 +11,12 @@ public class TimeCondition extends AbsCondition {
 
     @Override
     public <T> boolean matches(T t) {
-        if(!(t instanceof Map)){
+        if (!(t instanceof Map)) {
             return false;
         }
-        Map map= (Map) t;
-        Long eventTime= (Long) map.get("time");
-        if(eventTime>= startTime && eventTime<=endTime){
+        Map map = (Map) t;
+        Long eventTime = (Long) map.get("time");
+        if (eventTime >= startTime && eventTime <= endTime) {
             return true;
         }
         return false;

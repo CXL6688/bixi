@@ -21,8 +21,8 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * @Description: service template implementation
  * @author Cao Xueliang
+ * @Description: service template implementation
  * @date 2020/9/1 21:46
  **/
 @Data
@@ -57,27 +57,27 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public void delete(List<Long> ids) {
-        for (Long id:ids){
+        for (Long id : ids) {
             this.jpaRepositoryImplementation.deleteById(id);
         }
     }
 
     /**
-     * @Description: TODO
      * @param queryAll:
-     * @param response: 
-     * @return: void
+     * @param response:
      * @throws
+     * @Description: TODO
+     * @return: void
      * @author Cao Xueliang
      * @date 2020/9/1 9:04
      **/
     @Override
     public void download(List<T> queryAll, HttpServletResponse response) throws IOException {
-        String tableName=this.entityClazz.getSimpleName();
-        Long currentTimeStamp=System.currentTimeMillis();
-        String title=tableName;
-        String sheetName=tableName;
-        String fileName=tableName+currentTimeStamp;
-        ExcelUtils.exportExcel(queryAll,title,sheetName,entityClazz,fileName,response);
+        String tableName = this.entityClazz.getSimpleName();
+        Long currentTimeStamp = System.currentTimeMillis();
+        String title = tableName;
+        String sheetName = tableName;
+        String fileName = tableName + currentTimeStamp;
+        ExcelUtils.exportExcel(queryAll, title, sheetName, entityClazz, fileName, response);
     }
 }

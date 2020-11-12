@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @BixiEntity
-@Table(name="sys_user")
+@Table(name = "sys_user")
 public class User extends BaseEntity implements Serializable {
     @Id
     @Column(name = "user_id")

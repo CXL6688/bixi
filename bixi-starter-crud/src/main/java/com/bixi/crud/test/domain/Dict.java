@@ -27,15 +27,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
-* @author Zheng Jie
-* @date 2019-04-10
-*/
+ * @author Zheng Jie
+ * @date 2019-04-10
+ */
 @BixiEntity
 @Entity
 @Getter
 @Setter
 @Component
-@Table(name="sys_dict")
+@Table(name = "sys_dict")
 public class Dict extends BaseEntity implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,10 +8,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * @Description: regist service for entity
  * @author cao xueliang
+ * @Description: regist service for entity
  * @date 2020/9/19:58
-*/
+ */
 @Component
 @Order(10)
 public class ServiceRegister extends AbsBeanRegister {
@@ -28,10 +28,10 @@ public class ServiceRegister extends AbsBeanRegister {
     @Override
     protected BeanDefinitionBuilder getBeanDefinitionBuilder(Class entityClass) {
         try {
-            Class clazz=Class.forName(this.target);
-            BeanDefinitionBuilder builder= BeanDefinitionBuilder.genericBeanDefinition(clazz);
-            builder=builder.addPropertyReference(baseServicePropertyName, NameUtils.generateRepositoryNameByEntity(entityClass));
-            builder=builder.addPropertyValue(this.baseServicePropertyEntityClazz,entityClass);
+            Class clazz = Class.forName(this.target);
+            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
+            builder = builder.addPropertyReference(baseServicePropertyName, NameUtils.generateRepositoryNameByEntity(entityClass));
+            builder = builder.addPropertyValue(this.baseServicePropertyEntityClazz, entityClass);
             return builder;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -41,6 +41,6 @@ public class ServiceRegister extends AbsBeanRegister {
 
     @Override
     protected String getBeanName(Class entityClass) {
-        return  NameUtils.generateServiceNameByEntity(entityClass);
+        return NameUtils.generateServiceNameByEntity(entityClass);
     }
 }

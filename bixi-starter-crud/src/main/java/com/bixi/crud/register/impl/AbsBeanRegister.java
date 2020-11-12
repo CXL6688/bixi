@@ -9,67 +9,67 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.ConfigurableApplicationContext;
 
 /**
- * @Description: abstract register class for regist beans
  * @author cao xueliang
+ * @Description: abstract register class for regist beans
  * @date 2020/9/19:31
-*/
+ */
 public abstract class AbsBeanRegister implements ApplicationContextAware, BeanRegister {
     protected ApplicationContext applicationContext;
     protected DefaultListableBeanFactory defaultListableBeanFactory;
 
     /**
-     * @Description: do regist bean by entity class
      * @param entityClass: bixi entity class
-     * @return: boolean
      * @throws
+     * @Description: do regist bean by entity class
+     * @return: boolean
      * @author Cao Xueliang
      * @date 2020/9/1 10:00
      **/
     @Override
     public boolean regist(Class entityClass) {
-        try{
-            BeanDefinitionBuilder builder= this.getBeanDefinitionBuilder(entityClass);
-            String beanName= this.getBeanName(entityClass);
+        try {
+            BeanDefinitionBuilder builder = this.getBeanDefinitionBuilder(entityClass);
+            String beanName = this.getBeanName(entityClass);
             defaultListableBeanFactory.registerBeanDefinition(beanName, builder.getRawBeanDefinition());
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return false;
     }
 
     /**
-     * @Description: get beanDefinitionBuilder for different beans
      * @param entityClass:
-     * @return: org.springframework.beans.factory.support.BeanDefinitionBuilder
      * @throws
+     * @Description: get beanDefinitionBuilder for different beans
+     * @return: org.springframework.beans.factory.support.BeanDefinitionBuilder
      * @author Cao Xueliang
      * @date 2020/9/1 10:00
      **/
     protected abstract BeanDefinitionBuilder getBeanDefinitionBuilder(Class entityClass);
 
     /**
-     * @Description: get bean name to regist
      * @param entityClass:
-     * @return: java.lang.String
      * @throws
+     * @Description: get bean name to regist
+     * @return: java.lang.String
      * @author Cao Xueliang
      * @date 2020/9/1 10:01
      **/
     protected abstract String getBeanName(Class entityClass);
 
     /**
-     * @Description: get spring application context
      * @param applicationContext:
-     * @return: void
      * @throws
+     * @Description: get spring application context
+     * @return: void
      * @author Cao Xueliang
      * @date 2020/9/1 10:01
      **/
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext=applicationContext;
-        ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext)this.applicationContext;
+        this.applicationContext = applicationContext;
+        ConfigurableApplicationContext configurableApplicationContext = (ConfigurableApplicationContext) this.applicationContext;
         defaultListableBeanFactory = (DefaultListableBeanFactory) configurableApplicationContext.getBeanFactory();
     }
 }

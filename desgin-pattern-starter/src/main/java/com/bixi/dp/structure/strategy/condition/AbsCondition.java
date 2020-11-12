@@ -15,9 +15,9 @@ public abstract class AbsCondition implements Condition {
 
     @Override
     public <T> boolean isMatch(T t) {
-        if(!CollectionUtils.isEmpty(conditions) && relation!=null){
-            return relation.with(conditions,t);
-        }else{
+        if (!CollectionUtils.isEmpty(conditions) && relation != null) {
+            return relation.with(conditions, t);
+        } else {
             return this.matches(t);
         }
     }

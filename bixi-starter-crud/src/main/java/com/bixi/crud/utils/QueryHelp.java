@@ -13,17 +13,17 @@ import java.util.*;
  * @date 2019-6-4 14:59:48
  */
 @Slf4j
-@SuppressWarnings({"unchecked","all"})
+@SuppressWarnings({"unchecked", "all"})
 public class QueryHelp {
 
     public static <R, Q> Predicate getPredicate(Root<R> root, Q query, CriteriaBuilder cb) {
         List<Predicate> list = new ArrayList<>();
-        if(query == null){
+        if (query == null) {
             return cb.and(list.toArray(new Predicate[0]));
         }
         List<Field> fields = getAllFields(query.getClass(), new ArrayList<>());
         List<String> blurrys = Arrays.asList("name");
-        if(CollectionUtils.isEmpty(blurrys)){
+        if (CollectionUtils.isEmpty(blurrys)) {
 
         }
         for (Field field : fields) {

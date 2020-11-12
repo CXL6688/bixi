@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @BixiEntity
-@Table(name="sys_config")
+@Table(name = "sys_config")
 public class Config {
     @Id
     @Column(name = "config_id")
