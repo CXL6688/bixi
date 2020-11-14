@@ -1,7 +1,6 @@
 package com.bixi.crud.template.service;
 
 import com.bixi.crud.dto.QueryCriteria;
-import com.bixi.crud.test.domain.BaseEntity;
 import org.springframework.data.domain.Pageable;
 
 import javax.servlet.http.HttpServletResponse;

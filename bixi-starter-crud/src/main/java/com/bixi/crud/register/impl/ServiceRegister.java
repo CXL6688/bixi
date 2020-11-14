@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
  * @Description: regist service for entity
  * @date 2020/9/19:58
  */
-@Component
 @Order(10)
 public class ServiceRegister extends AbsBeanRegister {
 

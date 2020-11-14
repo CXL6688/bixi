@@ -16,7 +16,6 @@ import javax.persistence.EntityManager;
  * @Description: regist repository for entity
  * @date 2020/9/19:26
  */
-@Component
 @Order(1)
 public class RepositoryRegister extends AbsBeanRegister {
     private EntityManager em;

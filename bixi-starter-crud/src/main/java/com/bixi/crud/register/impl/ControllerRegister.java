@@ -22,7 +22,6 @@ import java.util.*;
  * @date 2020/9/1 10:07
  */
 @Order(100)
-@Component
 public class ControllerRegister extends AbsBeanRegister {
 
     @Value("${com.bixi.crud.template.controller.impl.BaseControllerImpl.property.BaseService.name}")

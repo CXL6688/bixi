@@ -3,7 +3,6 @@ package com.bixi.crud.template.controller.impl;
 import com.bixi.crud.template.controller.BaseController;
 import com.bixi.crud.dto.QueryCriteria;
 import com.bixi.crud.template.service.BaseService;
-import com.bixi.crud.test.domain.BaseEntity;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
@@ -17,7 +16,7 @@ import java.io.IOException;
 import java.util.List;
 
 @Data
-public class BaseControllerImpl<T extends BaseEntity> implements BaseController<T> {
+public class BaseControllerImpl<T> implements BaseController<T> {
 
     private BaseService baseService;
 

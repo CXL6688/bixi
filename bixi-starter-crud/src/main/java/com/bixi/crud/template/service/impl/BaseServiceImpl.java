@@ -1,9 +1,7 @@
 package com.bixi.crud.template.service.impl;
 
-import cn.afterturn.easypoi.excel.ExcelExportUtil;
 import com.bixi.crud.dto.QueryCriteria;
 import com.bixi.crud.template.service.BaseService;
-import com.bixi.crud.test.domain.BaseEntity;
 import com.bixi.crud.utils.ExcelUtils;
 import com.bixi.crud.utils.PageUtil;
 import com.bixi.crud.utils.QueryHelp;
